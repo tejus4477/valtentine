@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Buba | Valentine 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400&family=Special+Elite&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --lilac: #C8A2C8;
+            --deep-plum: #4B0082;
+            --soft-lavender: #E6E6FA;
+            --cream: #FFF9FF;
+        }
+
+        /* Entry Overlay */
+        #entry-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--cream);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 1s ease;
+            text-align: center;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cream);
+            margin: 0; padding: 0;
+            overflow-x: hidden;
+            color: var(--deep-plum);
+            scroll-behavior: smooth;
+        }
+
+        /* Floating Background Layer */
+        #bg-animation-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            bottom: -100px;
+            opacity: 0.5;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.5; }
+            85% { opacity: 0.5; }
+            100% { transform: translateY(-125vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(230, 230, 250, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .static-heart {
+            position: absolute;
+            opacity: 0.15;
+            color: var(--deep-plum);
+            z-index: 0;
+            user-select: none;
+        }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--deep-plum); margin: 0; }
+
+        /* Polaroid Gallery */
+        .gallery-section { padding: 80px 20px; text-align: center; }
+        .photo-container { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
+        
+        .polaroid {
+            background: white;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transform: rotate(-2deg);
+            transition: all 0.4s ease;
+            border: 1px solid #eee;
+        }
+        .polaroid:nth-child(even) { transform: rotate(3deg); }
+        .polaroid img { width: 280px; height: 350px; object-fit: cover; display: block; }
+        .polaroid p { font-family: 'Playfair Display', serif; margin-top: 20px; color: var(--lilac); font-weight: bold; }
+
+        /* Letter Section */
+        .letter-section { padding: 100px 20px; display: flex; justify-content: center; }
+        .letter-paper {
+            background: rgba(255, 255, 255, 0.95);
+            width: 100%;
+            max-width: 800px;
+            padding: 60px;
+            box-shadow: 0 10px 50px rgba(75, 0, 130, 0.1);
+            border-left: 4px solid var(--lilac);
+        }
+
+        #typewriter {
+            font-family: 'Special Elite', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+
+        /* Proposal Section */
+        .proposal-container { 
+            padding: 150px 20px; 
+            text-align: center; 
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .proposal-container h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--deep-plum);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-top: 40px;
+            min-height: 200px;
+            position: relative;
+        }
+
+        .btn { 
+            padding: 18px 50px; 
+            font-size: 1.4rem; 
+            border-radius: 50px; 
+            border: none; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: 0.3s; 
+        }
+
+        #yesBtn { background-color: var(--deep-plum); color: white; box-shadow: 0 4px 15px rgba(75, 0, 130, 0.3); }
+        #noBtn { background-color: #f0f0f0; color: #888; position: relative; }
+
+        #mute-toggle {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+            background: rgba(255, 255, 255, 0.8); border: 1px solid var(--lilac);
+            border-radius: 50%; width: 45px; height: 45px; cursor: pointer; display: none;
+        }
+
+        .celebration-flower { position: fixed; top: -10%; pointer-events: none; z-index: 1000; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="entry-overlay" onclick="startExperience()">
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">For Drithi</h2>
+        <p style="font-size: 1.2rem; opacity: 0.8;">Click to open your Valentine ❤️</p>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://dl.dropboxusercontent.com/scl/fi/ev49gqxekdlax4jw6xmvb/Preetiya-Hesare-Neenu.mp3?rlkey=4xy7zzsfjqivoknwz0evn2er7" type="audio/mpeg">
+    </audio>
+
+    <div id="bg-animation-container"></div>
+
+    <section class="hero">
+        <span class="static-heart" style="top: 10%; left: 5%; font-size: 100px;">♥</span>
+        <span class="static-heart" style="top: 20%; right: 10%; font-size: 60px;">♥</span>
+        <span class="static-heart" style="bottom: 15%; left: 15%; font-size: 80px;">♥</span>
+        <span class="static-heart" style="bottom: 25%; right: 5%; font-size: 120px;">♥</span>
+        
+        <div class="hero-content">
+            <p style="letter-spacing: 3px; font-weight: bold; color: var(--lilac);">VALENTINE 2026</p>
+            <h1>For My Dearest Buba</h1>
+            <p style="font-style: italic; opacity: 0.8; margin-top: 15px;">"You are the most beautiful change I have ever made."</p>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="photo-container">
+            <div class="polaroid">
+                <img src="https://dl.dropboxusercontent.com/scl/fi/a4czu3wo0w73alwgu4amv/IMG20250623213345.jpg?rlkey=cwwjsgvtoqiem8yws6a37qwcc" alt="May">
+            </div>
+            <div class="polaroid">
+                <img src="https://dl.dropboxusercontent.com/scl/fi/n1is72oevvotfbjyate4p/IMG20250709152121.jpg?rlkey=p5q4px09gfui1yloualvphjs8" alt="June 20">
+            </div>
+            <div class="polaroid">
+                <img src="https://dl.dropboxusercontent.com/scl/fi/sfojmh648r7re363gl4vr/IMG20250912154308.jpg?rlkey=crrcof2lknujy6f01its9frvx" alt="Mysore">
+            </div>
+        </div>
+    </section>
+
+    <section class="letter-section">
+        <div class="letter-paper">
+            <div id="typewriter"></div>
+        </div>
+    </section>
+
+    <section class="proposal-container">
+        <h2>Drithi, will you make me the happiest person and be my wife?</h2>
+        <p id="nudgeText" style="height: 24px; color: var(--lilac); font-style: italic; font-weight: 500;"></p>
+        <div class="button-group" id="btnWrapper">
+            <button id="yesBtn" class="btn" onclick="celebrate()">YES! 💍</button>
+            <button id="noBtn" class="btn">No</button>
+        </div>
+    </section>
+
+    <button id="mute-toggle" onclick="toggleMute()">🔊</button>
+
+    <script>
+        function startExperience() {
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log("Audio play failed", e));
+            document.getElementById('entry-overlay').style.opacity = '0';
+            document.getElementById('mute-toggle').style.display = 'block';
+            setTimeout(() => { document.getElementById('entry-overlay').style.display = 'none'; }, 1000);
+            setInterval(createBgElement, 600);
+        }
+
+        function toggleMute() {
+            const music = document.getElementById('bgMusic');
+            const btn = document.getElementById('mute-toggle');
+            music.muted = !music.muted;
+            btn.innerText = music.muted ? "🔇" : "🔊";
+        }
+
+        const bgContainer = document.getElementById('bg-animation-container');
+        const elements = ['🎈', '🌸', '🪷', '✨', '💜'];
+        function createBgElement() {
+            const el = document.createElement('div');
+            el.className = 'floating-element';
+            el.innerHTML = elements[Math.floor(Math.random() * elements.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 25 + 15) + 'px';
+            el.style.animationDuration = (Math.random() * 4 + 6) + 's'; 
+            bgContainer.appendChild(el);
+            setTimeout(() => el.remove(), 10000);
+        }
+
+        const letterText = `My Dearest Buba,\n\nWhen we first connected back in May, I had no idea my world was about to shift its axis. I never imagined I’d reach a point where I’d happily let someone hold the keys to my heart, but then you happened. You are, without a question, the most beautiful change I have ever made.\n\nYou are so deeply ingrained in me now that loving you feels as natural as breathing. I’ve found a strange, beautiful kind of peace in the "little things"—remembering the tiny timings of your day, sensing the slightest shift in your mood before you even speak, and knowing exactly how to bring that smile back to your face.\n\nJune 20th remains etched in my soul as one of the happiest days of my life. It was the day we stopped wondering and started belonging to each other. We’ve had our ups and downs, and I know my "stupid self" took a little longer to navigate the big questions, but everything changed that day in Mysore.\n\nIt was there, looking at you, that I realized my vision of the future had been rewritten. I realized that if I am to walk the path of parenthood, it is with you and only you.\n\nI know I haven’t been a perfect partner, and for the times I fell short, I am truly sorry. But today, I want to give you my word: I promise to love you with an intensity that never wavers. I promise to protect you so fiercely that the "little girl" inside you feels safe enough to come out and play again.\n\nI am here to create a future so bright and memories so big that the shadows of the past finally fade away. I love you with my whole heart, my entire mind, and every fiber of being.\n\nHappy Valentine’s Day, my Buba, my Kusu, my everything.\n\nAlways yours,\nBubalus bubalis`;
+
+        let i = 0;
+        let isTyped = false;
+        function typeWriter() {
+            if (i < letterText.length) {
+                document.getElementById("typewriter").innerHTML += letterText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 35);
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            const letterPos = document.getElementById('typewriter').getBoundingClientRect().top;
+            if (letterPos < window.innerHeight - 100 && !isTyped) {
+                typeWriter();
+                isTyped = true;
+            }
+        });
+
+        const noBtn = document.getElementById('noBtn');
+        const wrapper = document.getElementById('btnWrapper');
+	// Array of playful nudges
+	const nudges = [
+	    "Nice try, Kusu! 😉",
+	    "Is that a finger slip? haha",
+	    "The 'Yes' button is right there! 👉",
+	    "Error 404: 'No' not found.",
+	    "You're too fast, but I'm faster! 🏃‍♂️",
+	    "I'll wait all day! ❤️",
+	    "Give up, Buba! It's fate.",
+	    "My heart says Yes, why are you saying No? 🥺",
+	    "Nice reflex! But try the other button.",
+	    "Are we playing tag now? 🌸"
+	];
+
+	function moveButton() {
+	    // Move the button
+	    const maxX = wrapper.clientWidth - noBtn.clientWidth;
+	    const maxY = wrapper.clientHeight - noBtn.clientHeight;
+	    noBtn.style.position = 'absolute';
+	    noBtn.style.left = Math.floor(Math.random() * maxX) + 'px';
+	    noBtn.style.top = Math.floor(Math.random() * maxY) + 'px';
+    
+	    // Change the nudge text randomly
+	    const randomNudge = nudges[Math.floor(Math.random() * nudges.length)];
+	    document.getElementById('nudgeText').innerText = randomNudge;
+	}
+        noBtn.addEventListener('mouseover', moveButton);
+
+        function celebrate() {
+            noBtn.style.display = 'none';
+            document.getElementById('nudgeText').style.display = 'none';
+            document.querySelector('.proposal-container h2').innerText = "FOREVER YOURS! ❤️🌸";
+            document.querySelector('.proposal-container h2').style.color = "#FF1493";
+            for (let j = 0; j < 100; j++) { setTimeout(createConfetti, j * 50); }
+        }
+
+        function createConfetti() {
+            const flower = document.createElement('div');
+            flower.className = 'celebration-flower';
+            flower.innerHTML = ['🌸', '🪷', '✨', '💜', '💍', '💖'][Math.floor(Math.random() * 6)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            document.body.appendChild(flower);
+            setTimeout(() => flower.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
